@@ -3,10 +3,14 @@ PImage img;
 int pointillize = 26;
 int cellsize = 2; // Dimensions of each cell in the grid
 int cols, rows;   // Number of columns and rows in our system
+float xCopy, yCopy;
+float angle = 0;
 
 void setup() {
   size(800, 800);
   smooth();
+  stroke(200);
+  strokeWeight(0.5);
   myImage = loadImage("apple-wave.png");//("wolf.jpg");
   cols = width/cellsize;             // Calculate # of columns
   rows = height/cellsize; 
@@ -15,32 +19,49 @@ void setup() {
 }
 
 void draw() {
-  background(0);
-    rect(30,30,30,30);
+  background(0, 59,44);//(100); // 0, 59,44
+  //line(0,0,width,height);
+  //rect(30,30,30,30);
+  
+  float curve = 10 * cos(angle);
+  angle += 1;//PI/180;
+  
+
   loadPixels(); 
   myImage.loadPixels();
-  
   float param = map(mouseY, 30, height, 1, 10);
   float paramO = map(mouseX, 30, width, 1, 10);
 
-  
+
   //print(param);
   for (float y = 0; y < height - 10; y = y+param) {
    for (float x = 0; x < width; x = x+ paramO /* random(param)*/) {
       float loc = x + y*width;
       int convert = int(loc);
-      // The functions red(), green(), and blue() pull out the 3 color components from a pixel.
+      //print(x,y);
+      //print(int(curve) + "<------>");
+
+       //xCopy = x;
+       //yCopy = y;
       
       float r = red(myImage.pixels[convert]);
       float g = green(myImage.pixels[convert]);
       float b = blue(myImage.pixels[convert]);
       //214 188 144
-      
-      //pixels[convert] = color(r, g, b); 
+      if((r== 214) && (g==188) && (b == 144)){
+          //print(round(x) + "--" + round(y));
+          //print(xCopy + "+" + yCopy);
+          //pixels[convert] = color(r, g, b);
+          int moveAble = convert + int(curve);
+          pixels[moveAble] = color(r, g, b);
 
+         }
     }  
   }
     updatePixels();
+    //fill(255,255,255);
+    //rect(xCopy, yCopy,30,30);
+    //print(xCopy+ "<>" + yCopy);
 }
 
 
