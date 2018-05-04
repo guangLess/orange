@@ -13,7 +13,7 @@ void draw(){
   float x = mouseX;
   float y = mouseY;
   String point = str(x) + str(y);
-  pointArray = append({point};
+  //pointArray = append({point};
   pointData= append(pointArray, point);
   
   //pointData.concat({point}); 
