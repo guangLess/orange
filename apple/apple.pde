@@ -4,7 +4,8 @@ int pointillize = 26;
 int cellsize = 2; // Dimensions of each cell in the grid
 int cols, rows;   // Number of columns and rows in our system
 float xCopy, yCopy;
-float angle = 0;
+float angle = PI;
+float curve;
 
 void setup() {
   size(800, 800);
@@ -22,10 +23,10 @@ void draw() {
   background(0, 59,44);//(100); // 0, 59,44
   //line(0,0,width,height);
   //rect(30,30,30,30);
-  
-  float curve = 10 * cos(angle);
-  angle += 1;//PI/180;
-  
+  //if(angle == 6){angle = 0;}
+  curve = 6+ (5 * cos(angle));
+  angle += 0.0001;
+
 
   loadPixels(); 
   myImage.loadPixels();
@@ -33,13 +34,15 @@ void draw() {
   float paramO = map(mouseX, 30, width, 1, 10);
 
 
-  //print(param);
-  for (float y = 0; y < height - 10; y = y+param) {
-   for (float x = 0; x < width; x = x+ paramO /* random(param)*/) {
+  //print(">",curve);
+  for (float y = 0; y < height - 10 ; y = y+curve) {//+curve
+   for (float x = 0; x < width; x = x+paramO) { //paramO
+      //print(int(curve) + "<------>");
       float loc = x + y*width;
+      //float loc = x + (y+curve)*width;
       int convert = int(loc);
       //print(x,y);
-      //print(int(curve) + "<------>");
+      
 
        //xCopy = x;
        //yCopy = y;
@@ -51,10 +54,10 @@ void draw() {
       if((r== 214) && (g==188) && (b == 144)){
           //print(round(x) + "--" + round(y));
           //print(xCopy + "+" + yCopy);
-          //pixels[convert] = color(r, g, b);
-          int moveAble = convert + int(curve);
-          pixels[moveAble] = color(r, g, b);
-
+          pixels[convert] = color(r, g, b);
+          
+          //int moveAble = convert + int(curve);
+          //pixels[moveAble] = color(r, g, b);
          }
     }  
   }

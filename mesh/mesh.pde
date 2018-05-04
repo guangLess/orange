@@ -23,11 +23,12 @@ int anchorNum = -1;
 boolean dragOrigin = false;
 boolean dragTarget = false;
 
-
+PImage img;
 
 void setup() {
   size(700, 700);
   smooth();
+   img = loadImage("wolf.jpg");
 
   myTransform.addAnchor(new PVector(margin, margin));
   myTransform.addAnchor(new PVector(width-margin, margin));
@@ -43,6 +44,8 @@ void draw() {
 
   strokeWeight(0.5);
   background(255);
+    texture(img);
+
 
   if (anchorNum >= 0) {
     if (dragOrigin) {
